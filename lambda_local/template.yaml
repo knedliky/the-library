@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  lambda example
+
+Resources:
+  LambdaExampleFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: lambda/
+      Handler: lambda.lambda_handler
+      Runtime: python3.11
+
+  APIGatewayExampleFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: api_gateway/
+      Handler: api_gateway.gateway_handler
+      Runtime: python3.11
+      Events:
+        GetResource:
+          Type: Api
+          Properties:
+            Path: /gateway
+            Method: get
